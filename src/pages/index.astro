@@ -20,6 +20,11 @@ import Layout from '../layouts/Layout.astro';
         In order for us to better serve you, please fill out the following form to the best of your ability. You can upload your artwork files directly below. Thank you!
       </p>
 
+      <div id="form-success" class="hidden rounded-lg border border-emerald-200 bg-emerald-50 p-8 text-center" role="status" aria-live="polite">
+        <p class="text-lg font-semibold text-emerald-800">Thank you! We've received your submission.</p>
+        <p class="mt-2 text-emerald-700">We'll review your quote request and get back to you soon.</p>
+      </div>
+
       <form class="space-y-6" id="quote-form" enctype="multipart/form-data">
         <!-- Contact -->
         <fieldset class="space-y-4">
@@ -393,8 +398,12 @@ import Layout from '../layouts/Layout.astro';
           });
           const data = (await res.json()) as { ok?: boolean; error?: string };
           if (res.ok && data.ok) {
-            (form as HTMLFormElement).reset();
-            alert('Thank you! Your quote request has been submitted.');
+            const successEl = document.getElementById('form-success');
+            if (successEl) {
+              form.classList.add('hidden');
+              successEl.classList.remove('hidden');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
           } else {
             alert(data.error ?? 'Something went wrong. Please try again.');
           }
