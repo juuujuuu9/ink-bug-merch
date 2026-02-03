@@ -1,0 +1,25 @@
+-- Run this once in Neon (SQL Editor) to create the entries table.
+CREATE TABLE IF NOT EXISTS entries (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  email TEXT NOT NULL,
+  shipping TEXT NOT NULL,
+  project_name TEXT NOT NULL,
+  rush TEXT NOT NULL,
+  due_date DATE,
+  apparel_type TEXT NOT NULL,
+  blanks TEXT NOT NULL,
+  total_items INTEGER NOT NULL,
+  size_breakdown TEXT,
+  brand_style TEXT,
+  garment_color TEXT,
+  ink_type TEXT,
+  print_locations TEXT NOT NULL,
+  location_1 TEXT,
+  ink_colors INTEGER,
+  ink_colors_additional INTEGER,
+  artwork_urls TEXT[]
+);

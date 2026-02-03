@@ -17,7 +17,7 @@ import Layout from '../layouts/Layout.astro';
         Request A Quote & Submit Your Artwork
       </h1>
       <p class="text-zinc-600 text-center mb-8 text-sm sm:text-base">
-        In order for us to better serve you, please fill out the following form to the best of your ability. Once you complete and submit the form, you will then be able to upload your files directly to our Dropbox link. Thank you!
+        In order for us to better serve you, please fill out the following form to the best of your ability. You can upload your artwork files directly below. Thank you!
       </p>
 
       <form class="space-y-6" id="quote-form">
@@ -228,4 +228,40 @@ import Layout from '../layouts/Layout.astro';
     </a>
     <p class="text-white/60 text-sm mt-6">Website Built By THOUGHTFORM WORLDWIDE</p>
   </footer>
+
+  <script>
+    const form = document.getElementById('quote-form') as HTMLFormElement;
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+        const originalText = btn?.textContent ?? 'Submit';
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+        }
+        const fd = new FormData(form);
+        try {
+          const res = await fetch('/api/submit', {
+            method: 'POST',
+            body: fd,
+          });
+          const data = (await res.json()) as { ok?: boolean; error?: string };
+          if (res.ok && data.ok) {
+            (form as HTMLFormElement).reset();
+            alert('Thank you! Your quote request has been submitted.');
+          } else {
+            alert(data.error ?? 'Something went wrong. Please try again.');
+          }
+        } catch {
+          alert('Network error. Please try again.');
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = originalText;
+          }
+        }
+      });
+    }
+  </script>
 </Layout>
