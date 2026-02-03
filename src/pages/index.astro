@@ -25,7 +25,7 @@ import Layout from '../layouts/Layout.astro';
         <p class="mt-2 text-emerald-700">We'll review your quote request and get back to you soon.</p>
       </div>
 
-      <form class="space-y-6" id="quote-form" enctype="multipart/form-data">
+      <form class="space-y-6" id="quote-form" method="post" action="/api/submit" enctype="multipart/form-data">
         <!-- Contact -->
         <fieldset class="space-y-4">
           <legend class="text-lg font-semibold text-zinc-900 border-b border-zinc-200 pb-2 w-full">Contact</legend>

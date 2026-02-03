@@ -25,9 +25,11 @@ function getString(fd: FormData, name: string): string {
 
 export const POST: APIRoute = async ({ request }): Promise<Response> => {
   const contentType = request.headers.get('content-type') ?? '';
-  if (!contentType.includes('multipart/form-data')) {
+  const isMultipart = contentType.includes('multipart/form-data');
+  const isUrlEncoded = contentType.includes('application/x-www-form-urlencoded');
+  if (!isMultipart && !isUrlEncoded) {
     return new Response(
-      JSON.stringify({ error: 'Content-Type must be multipart/form-data' }),
+      JSON.stringify({ error: 'Content-Type must be multipart/form-data or application/x-www-form-urlencoded' }),
       { status: 400, headers: { 'Content-Type': 'application/json' } }
     );
   }
