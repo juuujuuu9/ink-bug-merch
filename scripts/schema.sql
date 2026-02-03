@@ -1,4 +1,5 @@
 -- Run this once in Neon (SQL Editor) to create the entries table.
+-- If the table already exists but is missing artwork_urls, run migration-artwork-urls.sql instead.
 CREATE TABLE IF NOT EXISTS entries (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),

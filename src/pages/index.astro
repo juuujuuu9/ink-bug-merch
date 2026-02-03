@@ -20,7 +20,7 @@ import Layout from '../layouts/Layout.astro';
         In order for us to better serve you, please fill out the following form to the best of your ability. You can upload your artwork files directly below. Thank you!
       </p>
 
-      <form class="space-y-6" id="quote-form">
+      <form class="space-y-6" id="quote-form" enctype="multipart/form-data">
         <!-- Contact -->
         <fieldset class="space-y-4">
           <legend class="text-lg font-semibold text-zinc-900 border-b border-zinc-200 pb-2 w-full">Contact</legend>
@@ -65,9 +65,9 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Address (shown only when "Ship to me" is selected) -->
         <div id="address-fields" class="space-y-4 hidden" aria-hidden="true">
-          <p class="text-lg font-semibold text-zinc-900">Address</p>
+          <p class="text-lg font-semibold text-zinc-900">Address <span class="text-red-600">*</span></p>
           <div>
-            <label for="street-address" class="block text-sm font-medium text-zinc-700 mb-1">Street Address</label>
+            <label for="street-address" class="block text-sm font-medium text-zinc-700 mb-1">Street Address <span class="text-red-600">*</span></label>
             <input type="text" id="street-address" name="streetAddress" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
           </div>
           <div>
@@ -76,7 +76,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label for="city" class="block text-sm font-medium text-zinc-700 mb-1">City</label>
+              <label for="city" class="block text-sm font-medium text-zinc-700 mb-1">City <span class="text-red-600">*</span></label>
               <input type="text" id="city" name="city" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
             </div>
             <div>
@@ -86,7 +86,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label for="zip-postal" class="block text-sm font-medium text-zinc-700 mb-1">ZIP / Postal Code</label>
+              <label for="zip-postal" class="block text-sm font-medium text-zinc-700 mb-1">ZIP / Postal Code <span class="text-red-600">*</span></label>
               <input type="text" id="zip-postal" name="zipPostal" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
             </div>
             <div>
@@ -228,7 +228,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <!-- Shown only when "Multiple Locations" is selected -->
           <div id="multiple-locations-describe" class="hidden" aria-hidden="true">
-            <label for="multiple-locations-description" class="block text-sm font-medium text-zinc-700 mb-1">If More Than One Print Location, Please Describe:</label>
+            <label for="multiple-locations-description" class="block text-sm font-medium text-zinc-700 mb-1">If More Than One Print Location, Please Describe: <span class="text-red-600">*</span></label>
             <textarea id="multiple-locations-description" name="multipleLocationsDescription" rows="4" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y" placeholder="Describe your additional print locations..."></textarea>
           </div>
         </fieldset>
@@ -237,13 +237,14 @@ import Layout from '../layouts/Layout.astro';
         <div class="space-y-2">
           <h2 class="text-lg font-semibold text-zinc-900">Upload Your Artwork</h2>
           <p class="text-sm text-zinc-600">If you have artwork ready please upload it here.</p>
-          <div class="border-2 border-dashed border-zinc-300 rounded-lg p-8 text-center hover:border-zinc-400 transition-colors">
+          <div id="artwork-dropzone" class="border-2 border-dashed border-zinc-300 rounded-lg p-8 text-center hover:border-zinc-400 transition-colors">
             <p class="text-zinc-500 mb-4">Drop files here or</p>
             <label class="inline-block cursor-pointer">
               <span class="inline-flex items-center justify-center rounded bg-zinc-900 text-white font-medium px-6 py-3 hover:bg-zinc-800 transition-colors">SELECT FILES</span>
-              <input type="file" name="artwork" multiple accept=".ai,.jpg,.jpeg,.pdf,.psd,.png" class="sr-only" data-max-size="104857600" />
+              <input type="file" id="artwork-input" name="artwork" multiple accept=".ai,.jpg,.jpeg,.pdf,.psd,.png" class="sr-only" data-max-size="104857600" />
             </label>
-            <p class="text-xs text-zinc-400 mt-4">Accepted file types: ai, jpg, pdf, psd, png, jpeg. Max. file size: 100 MB.</p>
+            <p id="artwork-filenames" class="text-xs text-zinc-500 mt-4 hidden"></p>
+            <p class="text-xs text-zinc-400 mt-1">Accepted file types: ai, jpg, pdf, psd, png, jpeg. Max. file size: 100 MB.</p>
           </div>
         </div>
 
@@ -258,13 +259,13 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- Footer -->
   <footer class="bg-zinc-900 text-white py-10 px-4 text-center">
-    <p class="font-semibold">COPYRIGHT © 2023 INK BUG MERCH</p>
+    <p class="font-semibold">COPYRIGHT © 2026 INK BUG MERCH</p>
     <p class="mt-1">RICHMOND, VA</p>
     <a href="mailto:inkbugmerch@gmail.com" class="block mt-2 text-white/90 hover:text-white transition-colors">INKBUGMERCH@GMAIL.COM</a>
-    <a href="https://instagram.com/inkbugmerch" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 p-2 rounded hover:bg-white/10 transition-colors" aria-label="Instagram">
+    <a href="https://www.instagram.com/inkbug_merch/?hl=en" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 p-2 rounded hover:bg-white/10 transition-colors" aria-label="Instagram">
       <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
     </a>
-    <p class="text-white/60 text-sm mt-6">Website Built By THOUGHTFORM WORLDWIDE</p>
+    <p class="text-white/60 text-sm mt-6">Website by <a href="https://www.thoughtform.world" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white transition-colors underline">Thoughtform Worldwide</a></p>
   </footer>
 
   <script>
@@ -320,6 +321,58 @@ import Layout from '../layouts/Layout.astro';
 
       radios.forEach((r) => r.addEventListener('change', updateVisibility));
       updateVisibility();
+    })();
+
+    (function initArtworkDropzone(): void {
+      const dropzone = document.getElementById('artwork-dropzone');
+      const input = document.getElementById('artwork-input') as HTMLInputElement | null;
+      const filenamesEl = document.getElementById('artwork-filenames');
+      if (!dropzone || !input || !filenamesEl) return;
+
+      const inp = input;
+      const fnEl = filenamesEl;
+
+      function addFilesToInput(newFiles: File[]): void {
+        if (newFiles.length === 0) return;
+        const dt = new DataTransfer();
+        const existing = inp.files;
+        const len = existing ? existing.length : 0;
+        for (let i = 0; i < len; i++) {
+          const f = existing?.item(i);
+          if (f) dt.items.add(f);
+        }
+        for (const f of newFiles) dt.items.add(f);
+        inp.files = dt.files;
+        updateFilenames();
+      }
+
+      function updateFilenames(): void {
+        const files = inp.files;
+        if (!files?.length) {
+          fnEl.textContent = '';
+          fnEl.classList.add('hidden');
+          return;
+        }
+        fnEl.textContent = `${files.length} file(s): ${Array.from(files).map((f) => f.name).join(', ')}`;
+        fnEl.classList.remove('hidden');
+      }
+
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('border-zinc-500', 'bg-zinc-50');
+      });
+      dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('border-zinc-500', 'bg-zinc-50');
+      });
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('border-zinc-500', 'bg-zinc-50');
+        const files = e.dataTransfer?.files;
+        if (files?.length) addFilesToInput(Array.from(files));
+      });
+      input.addEventListener('change', updateFilenames);
     })();
 
     const form = document.getElementById('quote-form') as HTMLFormElement;

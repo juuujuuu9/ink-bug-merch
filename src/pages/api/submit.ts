@@ -185,8 +185,11 @@ export const POST: APIRoute = async ({ request }): Promise<Response> => {
     }
   }
 
-  const adminEmail = import.meta.env.ADMIN_EMAIL as string | undefined;
-  if (adminEmail) {
+  const adminEmailRaw = import.meta.env.ADMIN_EMAIL as string | undefined;
+  const adminEmails = adminEmailRaw
+    ? adminEmailRaw.split(',').map((e) => e.trim()).filter(Boolean)
+    : [];
+  if (adminEmails.length > 0) {
     const projectName = getString(fd, 'projectName').trim();
     const customerName = `${getString(fd, 'firstName').trim()} ${getString(fd, 'lastName').trim()}`;
     const customerEmail = getString(fd, 'email').trim();
@@ -195,7 +198,7 @@ export const POST: APIRoute = async ({ request }): Promise<Response> => {
       .join('<br/>');
     try {
       await sendEmail({
-        to: adminEmail,
+        to: adminEmails,
         subject: `New Quote Request: ${projectName} (${customerName})`,
         html: `
           <p><strong>New quote request submitted</strong></p>
@@ -211,7 +214,8 @@ export const POST: APIRoute = async ({ request }): Promise<Response> => {
         `,
       });
     } catch (err) {
-      console.error('Admin email failed:', err);
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error('Admin email failed:', msg, err);
       // Do not fail the request; submission was saved
     }
   }

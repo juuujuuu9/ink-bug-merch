@@ -29,7 +29,14 @@ Astro site with React, Tailwind CSS, Resend (email), and Neon (Postgres).
    - **Resend**: [resend.com](https://resend.com) → API key and (optional) `RESEND_FROM`
    - **Neon**: [neon.tech](https://neon.tech) → connection string as `DATABASE_URL`
 
-3. **Run dev server**
+3. **Database (Neon)**
+
+   In the [Neon SQL Editor](https://neon.tech/docs/connect/sql-editor), run:
+
+   - **New project:** `scripts/schema.sql` to create the `entries` table.
+   - **Existing table without `artwork_urls`:** `scripts/migration-artwork-urls.sql` to add the column.
+
+4. **Run dev server**
 
    ```bash
    npm run dev
