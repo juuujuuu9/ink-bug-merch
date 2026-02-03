@@ -3,9 +3,19 @@ import '../styles/global.css';
 
 interface Props {
   title?: string;
+  /** Meta description for search snippets and social sharing. */
+  description?: string;
+  /** Canonical URL (defaults to current page URL without query string). */
+  canonical?: string;
+  /** Absolute or path URL for og:image / twitter:image (defaults to /logo.png). */
+  image?: string;
 }
 
-const { title = 'InkBugMerch' } = Astro.props;
+const { title = 'InkBugMerch', description, canonical, image = '/logo.png' } = Astro.props;
+
+const origin = Astro.url.origin;
+const canonicalUrl = canonical ?? `${origin}${Astro.url.pathname}`;
+const imageUrl = image.startsWith('http') ? image : `${origin}${image}`;
 ---
 
 <!doctype html>
@@ -15,11 +25,27 @@ const { title = 'InkBugMerch' } = Astro.props;
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonicalUrl} />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="en_US" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="theme-color" content="#18181b" />
   </head>
   <body>
+    <a href="#main-content" class="absolute left-4 top-4 z-50 -translate-y-full rounded bg-zinc-900 px-3 py-2 text-white outline-none transition focus:translate-y-0 focus:outline-none">Skip to main content</a>
     <slot />
   </body>
 </html>
