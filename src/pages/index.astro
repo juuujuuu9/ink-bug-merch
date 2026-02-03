@@ -1,0 +1,231 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Request A Quote | Ink Bug Merch">
+  <!-- Hero -->
+  <header class="bg-white py-12 flex justify-center">
+    <a href="/" class="block w-56 sm:w-72 md:w-80 text-zinc-900 hover:text-zinc-600 transition-colors" aria-label="Ink Bug Merch home">
+      <img src="/logo.png" alt="Ink Bug Merch" class="w-full h-auto" width="320" height="374" />
+    </a>
+  </header>
+
+  <!-- Body: white container with form -->
+  <main class="min-h-screen bg-zinc-100 py-12 px-4 sm:px-6">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-sm border border-zinc-200 p-8 sm:p-10">
+      <h1 class="text-2xl sm:text-3xl font-bold text-center text-zinc-900 mb-4">
+        Request A Quote & Submit Your Artwork
+      </h1>
+      <p class="text-zinc-600 text-center mb-8 text-sm sm:text-base">
+        In order for us to better serve you, please fill out the following form to the best of your ability. Once you complete and submit the form, you will then be able to upload your files directly to our Dropbox link. Thank you!
+      </p>
+
+      <form class="space-y-6" id="quote-form">
+        <!-- Contact -->
+        <fieldset class="space-y-4">
+          <legend class="text-lg font-semibold text-zinc-900 border-b border-zinc-200 pb-2 w-full">Contact</legend>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="first-name" class="block text-sm font-medium text-zinc-700 mb-1">First Name <span class="text-red-600">(Required)</span></label>
+              <input type="text" id="first-name" name="firstName" required class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+            </div>
+            <div>
+              <label for="last-name" class="block text-sm font-medium text-zinc-700 mb-1">Last Name <span class="text-red-600">(Required)</span></label>
+              <input type="text" id="last-name" name="lastName" required class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+            </div>
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-zinc-700 mb-1">Phone <span class="text-red-600">(Required)</span></label>
+            <input type="tel" id="phone" name="phone" required class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-zinc-700 mb-1">Email <span class="text-red-600">(Required)</span></label>
+            <input type="email" id="email" name="email" required class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+          </div>
+        </fieldset>
+
+        <!-- Shipping -->
+        <fieldset class="space-y-3">
+          <legend class="text-lg font-semibold text-zinc-900 border-b border-zinc-200 pb-2 w-full">Shipping Or Local Pickup? <span class="text-red-600">(Required)</span></legend>
+          <div class="space-y-2">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="radio" name="shipping" value="ship" required class="mt-1" />
+              <span class="text-zinc-700">Ship to me (shipping cost will be calculated based on weight & size of your order)</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="radio" name="shipping" value="pickup" class="mt-0" />
+              <span class="text-zinc-700">Local Pickup</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="radio" name="shipping" value="dropoff" class="mt-0" />
+              <span class="text-zinc-700">Local Dropoff</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Project -->
+        <div>
+          <label for="project-name" class="block text-sm font-medium text-zinc-700 mb-1">Project Name <span class="text-red-600">(Required)</span></label>
+          <input type="text" id="project-name" name="projectName" required class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+        </div>
+
+        <!-- Rush -->
+        <fieldset class="space-y-3">
+          <legend class="text-lg font-semibold text-zinc-900 border-b border-zinc-200 pb-2 w-full">Is this a RUSH order? <span class="text-red-600">(Required)</span></legend>
+          <p class="text-sm text-zinc-600">
+            Anything less than 10 business days in turnaround is considered a Rushed Job. Additional fees will be applied. Standard 10–15 business days turnaround applies to Normal Jobs.
+          </p>
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="rush" value="rush" required class="mt-0" />
+              <span class="text-zinc-700">RUSH Job</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="rush" value="normal" class="mt-0" />
+              <span class="text-zinc-700">Normal Job</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div>
+          <label for="due-date" class="block text-sm font-medium text-zinc-700 mb-1">When do you need this job IN HAND by?</label>
+          <input type="date" id="due-date" name="dueDate" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+        </div>
+
+        <!-- Apparel -->
+        <div>
+          <label for="apparel-type" class="block text-sm font-medium text-zinc-700 mb-1">Type of Apparel? <span class="text-red-600">(Required)</span></label>
+          <select id="apparel-type" name="apparelType" required class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 bg-white">
+            <option value="tshirt">T-Shirt</option>
+            <option value="hoodie">Hoodie</option>
+            <option value="tank">Tank</option>
+            <option value="polo">Polo</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <fieldset class="space-y-3">
+          <legend class="text-lg font-semibold text-zinc-900 border-b border-zinc-200 pb-2 w-full">Who is providing the blanks? <span class="text-red-600">(Required)</span></legend>
+          <p class="text-sm text-zinc-600">We will not accept used blanks of any kind; they must be new from manufacturer.</p>
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="blanks" value="customer" required class="mt-0" />
+              <span class="text-zinc-700">Customer</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="blanks" value="inkbug" class="mt-0" />
+              <span class="text-zinc-700">Ink Bug Merch</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div>
+          <label for="total-items" class="block text-sm font-medium text-zinc-700 mb-1">Total Number of Items? <span class="text-red-600">(Required)</span></label>
+          <input type="number" id="total-items" name="totalItems" min="1" required class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" placeholder="Greater than or equal to 1" />
+        </div>
+
+        <div>
+          <label for="size-breakdown" class="block text-sm font-medium text-zinc-700 mb-1">Size Breakdown</label>
+          <p class="text-sm text-zinc-500 mb-1">e.g. 10 small, 10 medium, 5 large</p>
+          <textarea id="size-breakdown" name="sizeBreakdown" rows="4" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y" placeholder="10 small, 10 medium..."></textarea>
+        </div>
+
+        <div>
+          <label for="brand-style" class="block text-sm font-medium text-zinc-700 mb-1">Brand or Style #</label>
+          <input type="text" id="brand-style" name="brandStyle" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+        </div>
+
+        <div>
+          <label for="garment-color" class="block text-sm font-medium text-zinc-700 mb-1">Garment Color</label>
+          <p class="text-sm text-zinc-500 mb-1">Specify the desired color(s)</p>
+          <input type="text" id="garment-color" name="garmentColor" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" />
+        </div>
+
+        <div>
+          <label for="ink-type" class="block text-sm font-medium text-zinc-700 mb-1">Ink Type</label>
+          <select id="ink-type" name="inkType" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 bg-white">
+            <option value="plastisol">Plastisol - standard</option>
+            <option value="waterbase">Water-based</option>
+            <option value="discharge">Discharge</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <!-- Print locations -->
+        <fieldset class="space-y-4">
+          <legend class="text-lg font-semibold text-zinc-900 border-b border-zinc-200 pb-2 w-full">Print Locations <span class="text-red-600">(Required)</span></legend>
+          <p class="text-sm text-zinc-600">How many print locations are there for your project? Print locations are areas of a garment that will be printed upon (e.g. front and back).</p>
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="printLocations" value="one" required class="mt-0" />
+              <span class="text-zinc-700">One Print Location</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="printLocations" value="multiple" class="mt-0" />
+              <span class="text-zinc-700">Multiple Locations</span>
+            </label>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-zinc-700 mb-2">Print Location 1</p>
+            <div class="flex flex-wrap gap-4">
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="location1" value="front" class="mt-0" /><span class="text-zinc-700">Front Center</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="location1" value="back" class="mt-0" /><span class="text-zinc-700">Back Center</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="location1" value="left-chest" class="mt-0" /><span class="text-zinc-700">Left Chest/Breast</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="location1" value="sleeve" class="mt-0" /><span class="text-zinc-700">Sleeve</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="location1" value="other" class="mt-0" /><span class="text-zinc-700">Other</span></label>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="ink-colors" class="block text-sm font-medium text-zinc-700 mb-1">How Many Ink Colors?</label>
+              <select id="ink-colors" name="inkColors" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 bg-white">
+                {[1, 2, 3, 4, 5, 6].map((n) => (
+                  <option value={n}>{n}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label for="ink-colors-additional" class="block text-sm font-medium text-zinc-700 mb-1">How Many Ink Colors for your Additional Print Locations?</label>
+              <select id="ink-colors-additional" name="inkColorsAdditional" class="w-full rounded border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 bg-white">
+                {[1, 2, 3, 4, 5, 6].map((n) => (
+                  <option value={n}>{n}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Artwork upload -->
+        <div class="space-y-2">
+          <h2 class="text-lg font-semibold text-zinc-900">Upload Your Artwork</h2>
+          <p class="text-sm text-zinc-600">If you have artwork ready please upload it here.</p>
+          <div class="border-2 border-dashed border-zinc-300 rounded-lg p-8 text-center hover:border-zinc-400 transition-colors">
+            <p class="text-zinc-500 mb-4">Drop files here or</p>
+            <label class="inline-block cursor-pointer">
+              <span class="inline-flex items-center justify-center rounded bg-zinc-900 text-white font-medium px-6 py-3 hover:bg-zinc-800 transition-colors">SELECT FILES</span>
+              <input type="file" name="artwork" multiple accept=".ai,.jpg,.jpeg,.pdf,.psd,.png" class="sr-only" data-max-size="104857600" />
+            </label>
+            <p class="text-xs text-zinc-400 mt-4">Accepted file types: ai, jpg, pdf, psd, png, jpeg. Max. file size: 100 MB.</p>
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <button type="submit" class="w-full rounded bg-zinc-900 text-white font-semibold py-4 px-6 hover:bg-zinc-800 transition-colors uppercase tracking-wide">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-zinc-900 text-white py-10 px-4 text-center">
+    <p class="font-semibold">COPYRIGHT © 2023 INK BUG MERCH</p>
+    <p class="mt-1">RICHMOND, VA</p>
+    <a href="mailto:inkbugmerch@gmail.com" class="block mt-2 text-white/90 hover:text-white transition-colors">INKBUGMERCH@GMAIL.COM</a>
+    <a href="https://instagram.com/inkbugmerch" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 p-2 rounded hover:bg-white/10 transition-colors" aria-label="Instagram">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <p class="text-white/60 text-sm mt-6">Website Built By THOUGHTFORM WORLDWIDE</p>
+  </footer>
+</Layout>
